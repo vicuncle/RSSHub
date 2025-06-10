@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build && mkdir -p api/lib && cp -r lib/* api/lib/",
+    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build && mkdir -p api/lib && cp -r dist/lib/* api/lib/",
     "outputDirectory": ".",
     "installCommand": "pnpm install --no-frozen-lockfile",
     "framework": null,
