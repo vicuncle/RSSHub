@@ -17,6 +17,9 @@
     "author": "DIYgod",
     "type": "module",
     "main": "lib/pkg.ts",
+    "imports": {
+        "@/*": "./lib/*"
+    },
     "files": [
         "lib"
     ],
