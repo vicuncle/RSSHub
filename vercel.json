@@ -1,8 +1,8 @@
 {
     "version": 2,
-    "buildCommand": "mkdir -p assets/build && pnpm install && pnpm run build && pnpm run build:docs",
+    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build && pnpm run build:docs",
     "outputDirectory": "dist",
-    "installCommand": "pnpm install",
+    "installCommand": "pnpm install --no-frozen-lockfile",
     "framework": null,
     "functions": {
         "api/vercel.ts": {
