@@ -1,3 +1,3 @@
-import app from '../lib/app';
+import app from '../dist/lib/app';
 
 export default app.fetch;
