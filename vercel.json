@@ -1,23 +1,19 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "lib/index.ts",
-            "use": "@vercel/node",
-            "config": {
-                "buildCommand": "pnpm install && pnpm run build && pnpm run build:docs"
-            }
+    "buildCommand": "pnpm install && pnpm run build && pnpm run build:docs",
+    "outputDirectory": "dist",
+    "installCommand": "pnpm install",
+    "framework": null,
+    "functions": {
+        "api/vercel.ts": {
+            "memory": 1024,
+            "maxDuration": 10
         }
-    ],
+    },
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/lib/index.ts",
-            "headers": {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type"
-            }
+            "dest": "/api/vercel.ts"
         }
     ],
     "env": {
