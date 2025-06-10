@@ -7,13 +7,14 @@
     "functions": {
         "api/vercel.ts": {
             "memory": 1024,
-            "maxDuration": 60
+            "maxDuration": 60,
+            "runtime": "nodejs22.x"
         }
     },
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/api/vercel.ts",
+            "dest": "/api/vercel",
             "headers": {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
