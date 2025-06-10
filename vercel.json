@@ -2,8 +2,12 @@
     "version": 2,
     "builds": [
         {
-            "src": "dist/index.js",
-            "use": "@vercel/node"
+            "src": "package.json",
+            "use": "@vercel/node",
+            "config": {
+                "buildCommand": "pnpm install && pnpm run build",
+                "outputDirectory": "dist"
+            }
         }
     ],
     "routes": [
@@ -12,8 +16,6 @@
             "dest": "/dist/index.js"
         }
     ],
-    "buildCommand": "pnpm install && pnpm run build",
-    "outputDirectory": "dist",
     "env": {
         "NODE_ENV": "production",
         "CACHE_TYPE": "memory",
