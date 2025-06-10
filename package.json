@@ -137,7 +137,9 @@
         "winston": "3.17.0",
         "xxhash-wasm": "1.1.0",
         "youtubei.js": "13.4.0",
-        "zod": "3.25.56"
+        "zod": "3.25.56",
+        "tsdown": "0.12.7",
+        "typescript": "5.8.3"
     },
     "devDependencies": {
         "@babel/preset-env": "7.27.2",
@@ -194,8 +196,6 @@
         "prettier": "3.5.3",
         "remark-parse": "11.0.0",
         "supertest": "7.1.1",
-        "tsdown": "0.12.7",
-        "typescript": "5.8.3",
         "unified": "11.0.5",
         "vite-tsconfig-paths": "5.1.4",
         "vitest": "2.1.9",
