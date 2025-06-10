@@ -2,18 +2,22 @@
     "version": 2,
     "builds": [
         {
-            "src": "package.json",
+            "src": "lib/index.ts",
             "use": "@vercel/node",
             "config": {
-                "buildCommand": "pnpm install && pnpm run build && pnpm run build:docs",
-                "outputDirectory": "dist"
+                "buildCommand": "pnpm install && pnpm run build && pnpm run build:docs"
             }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/dist/index.js"
+            "dest": "/lib/index.ts",
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type"
+            }
         }
     ],
     "env": {
