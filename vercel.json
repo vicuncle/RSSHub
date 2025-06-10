@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "buildCommand": "pnpm install && pnpm run build && pnpm run build:docs",
+    "buildCommand": "mkdir -p assets/build && pnpm install && pnpm run build && pnpm run build:docs",
     "outputDirectory": "dist",
     "installCommand": "pnpm install",
     "framework": null,
