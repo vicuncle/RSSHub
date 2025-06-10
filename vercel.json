@@ -1,7 +1,7 @@
 {
     "version": 2,
-    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build && cp -r lib dist/",
-    "outputDirectory": "dist",
+    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build",
+    "outputDirectory": ".",
     "installCommand": "pnpm install --no-frozen-lockfile",
     "framework": null,
     "functions": {

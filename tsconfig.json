@@ -11,9 +11,9 @@
         },
         "esModuleInterop": true,
         "noImplicitAny": false,
-        "outDir": "./dist",
+        "outDir": ".",
         "skipLibCheck": true,
-        "noEmit": true,
+        "noEmit": false,
         "incremental": true,
         "resolveJsonModule": true,
         "isolatedModules": true
