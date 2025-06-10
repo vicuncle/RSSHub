@@ -1,4 +1,4 @@
-import app from './lib/app';
+import app from '@/app';
 
 // 处理所有请求
 export default async function handler(req, res) {
