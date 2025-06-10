@@ -206,7 +206,7 @@
     },
     "packageManager": "pnpm@9.9.0",
     "engines": {
-        "node": ">=22"
+        "node": ">=18"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
