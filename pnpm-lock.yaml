@@ -185,6 +185,9 @@ importers:
       lz-string:
         specifier: 1.5.0
         version: 1.5.0
+      magic-string:
+        specifier: 0.30.17
+        version: 0.30.17
       mailparser:
         specifier: 3.7.3
         version: 3.7.3
@@ -275,12 +278,18 @@ importers:
       tough-cookie:
         specifier: 5.1.2
         version: 5.1.2
+      tsdown:
+        specifier: 0.12.7
+        version: 0.12.7(typescript@5.8.3)
       tsx:
         specifier: 4.19.4
         version: 4.19.4
       twitter-api-v2:
         specifier: 1.23.2
         version: 1.23.2
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
       ufo:
         specifier: 1.6.1
         version: 1.6.1
@@ -444,9 +453,6 @@ importers:
       lint-staged:
         specifier: 16.1.0
         version: 16.1.0
-      magic-string:
-        specifier: 0.30.17
-        version: 0.30.17
       mockdate:
         specifier: 3.0.5
         version: 3.0.5
@@ -465,12 +471,6 @@ importers:
       supertest:
         specifier: 7.1.1
         version: 7.1.1
-      tsdown:
-        specifier: 0.12.7
-        version: 0.12.7(typescript@5.8.3)
-      typescript:
-        specifier: 5.8.3
-        version: 5.8.3
       unified:
         specifier: 11.0.5
         version: 11.0.5
