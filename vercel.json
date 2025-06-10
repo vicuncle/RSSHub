@@ -1,19 +1,24 @@
 {
     "version": 2,
-    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build && pnpm run build:docs",
+    "buildCommand": "mkdir -p assets/build && pnpm install --no-frozen-lockfile && pnpm run build",
     "outputDirectory": "dist",
     "installCommand": "pnpm install --no-frozen-lockfile",
     "framework": null,
     "functions": {
         "api/vercel.ts": {
             "memory": 1024,
-            "maxDuration": 10
+            "maxDuration": 60
         }
     },
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/api/vercel.ts"
+            "dest": "/api/vercel.ts",
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+            }
         }
     ],
     "env": {

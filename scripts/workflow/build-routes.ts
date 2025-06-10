@@ -8,25 +8,31 @@ import toSource from 'tosource';
 import { getCurrentPath } from '../../lib/utils/helpers';
 const __dirname = getCurrentPath(import.meta.url);
 
-const foloAnalysis = await (
-    await fetch('https://api.follow.is/discover/rsshub-analytics', {
-        headers: {
-            'user-agent': 'RSSHub',
-        },
-    })
-).json();
-const foloAnalysisResult = foloAnalysis.data as Record<string, { subscriptionCount: number; topFeeds: any[] }>;
-const foloAnalysisTop100 = Object.entries(foloAnalysisResult)
-    .sort((a, b) => b[1].subscriptionCount - a[1].subscriptionCount)
-    .slice(0, 150);
+let foloAnalysisTop100: [string, any][] = [];
+
+try {
+    const foloAnalysis = await (
+        await fetch('https://api.follow.is/discover/rsshub-analytics', {
+            headers: {
+                'user-agent': 'RSSHub',
+            },
+        })
+    ).json();
+    const foloAnalysisResult = foloAnalysis.data as Record<string, { subscriptionCount: number; topFeeds: any[] }>;
+    foloAnalysisTop100 = Object.entries(foloAnalysisResult)
+        .sort((a, b) => b[1].subscriptionCount - a[1].subscriptionCount)
+        .slice(0, 150);
+} catch (e) {
+    console.warn('Failed to fetch analytics data, skipping popular tag generation:', e);
+}
 
 const maintainers: Record<string, string[]> = {};
-const radar: {
-    [domain: string]: {
-        _name: string;
-        [subdomain: string]: RadarItem[] | string;
-    };
-} = {};
+type RadarDomain = {
+    _name: string;
+} & {
+    [subdomain: string]: RadarItem[];
+};
+const radar: Record<string, RadarDomain> = {};
 
 for (const namespace in namespaces) {
     let defaultCategory = namespaces[namespace].categories?.[0];
@@ -62,7 +68,7 @@ for (const namespace in namespaces) {
                     if (!radar[domain]) {
                         radar[domain] = {
                             _name: namespaces[namespace].name,
-                        };
+                        } as RadarDomain;
                     }
                     if (!radar[domain][subdomain]) {
                         radar[domain][subdomain] = [];
