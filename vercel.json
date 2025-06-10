@@ -2,21 +2,25 @@
     "version": 2,
     "builds": [
         {
-            "src": "lib/index.js",
-            "use": "@vercel/node"
+            "src": "dist/index.js",
+            "use": "@vercel/node",
+            "config": {
+                "includeFiles": ["dist/**"]
+            }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "lib/index.js"
+            "dest": "dist/index.js"
         }
     ],
+    "buildCommand": "pnpm install && pnpm run build",
+    "outputDirectory": "dist",
     "env": {
         "NODE_ENV": "production",
-        "PORT": "1200",
         "CACHE_TYPE": "memory",
         "CACHE_EXPIRE": "300",
         "CACHE_CONTENT_EXPIRE": "3600"
     }
-}
+} 
