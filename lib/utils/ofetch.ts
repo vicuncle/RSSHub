@@ -3,7 +3,12 @@ import { config } from '@/config';
 import logger from '@/utils/logger';
 
 if (config.enableRemoteDebugging && process.env.NODE_ENV === 'dev') {
-    import('node-network-devtools').then(({ register }) => register());
+    import('node-network-devtools')
+        .then(({ register }) => register())
+        .catch(() => {
+            // Silently fail if the module is not available in production
+            logger.debug('node-network-devtools not available, skipping registration');
+        });
 }
 
 const rofetch = createFetch().create({
