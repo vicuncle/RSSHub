@@ -2,13 +2,31 @@ import { createFetch } from 'ofetch';
 import { config } from '@/config';
 import logger from '@/utils/logger';
 
-if (config.enableRemoteDebugging && process.env.NODE_ENV === 'dev') {
-    import('node-network-devtools')
-        .then(({ register }) => register())
-        .catch(() => {
-            // Silently fail if the module is not available in production
-            logger.debug('node-network-devtools not available, skipping registration');
-        });
+// Only attempt to use node-network-devtools in development mode
+// This code will be eliminated during production builds
+const loadDevTools = () => {
+    if (typeof window === 'undefined' && 
+        typeof process !== 'undefined' && 
+        process.env && 
+        config.enableRemoteDebugging && 
+        process.env.NODE_ENV === 'dev') {
+        // We're in Node.js and in development mode
+        import('node-network-devtools')
+            .then((module) => {
+                if (module && module.register) {
+                    module.register();
+                }
+            })
+            .catch((error) => {
+                // Silently fail if the module is not available in production
+                logger.debug('node-network-devtools not available, skipping registration');
+            });
+    }
+};
+
+// Only call this function in development
+if (process.env.NODE_ENV !== 'production') {
+    loadDevTools();
 }
 
 const rofetch = createFetch().create({

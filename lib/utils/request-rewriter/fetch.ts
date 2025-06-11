@@ -3,7 +3,7 @@ import { config } from '@/config';
 import undici, { Request, RequestInfo, RequestInit } from 'undici';
 import proxy from '@/utils/proxy';
 import { RateLimiterMemory, RateLimiterQueue } from 'rate-limiter-flexible';
-// Import node-network-devtools dynamically only in dev mode
+// node-network-devtools is only used in development mode
 
 const limiter = new RateLimiterMemory({
     points: 10,
@@ -16,18 +16,24 @@ const limiterQueue = new RateLimiterQueue(limiter, {
 });
 
 export const useCustomHeader = (headers: Headers) => {
+    // This function will be tree-shaken in production builds
     if (process.env.NODE_ENV === 'dev') {
-        // Dynamically import node-network-devtools only in dev mode
-        import('node-network-devtools').then(({ useRegisterRequest }) => {
-            useRegisterRequest((req) => {
-                for (const [key, value] of headers.entries()) {
-                    req.requestHeaders[key] = value;
+        // Only in development mode, try to load the module
+        // @ts-ignore - Dynamic import
+        import('node-network-devtools')
+            .then((module) => {
+                if (module && module.useRegisterRequest) {
+                    module.useRegisterRequest((req: any) => {
+                        for (const [key, value] of headers.entries()) {
+                            req.requestHeaders[key] = value;
+                        }
+                        return req;
+                    });
                 }
-                return req;
+            })
+            .catch(() => {
+                // Silently fail if the module is not available
             });
-        }).catch(() => {
-            // Silently fail if the module is not available
-        });
     }
 };
 
